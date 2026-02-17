@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunch Countdown</title>
+</head>
+<body>
+    <h1>Time Remaining Until Lunch (1 PM)</h1>
+    <div id="time-remaining" style="font-size: 30px; color: rgb(38, 99, 179);"></div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            let lunchTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 0, 0, 0);
+
+            if (now.getTime() > lunchTime.getTime()) {
+                lunchTime.setDate(lunchTime.getDate() + 1);
+            }
+
+            const timeDiff = lunchTime.getTime() - now.getTime();
+
+            const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            const formattedTime = 
+                `${hours.toString().padStart(2, '0')}h : 
+                ${minutes.toString().padStart(2, '0')}m : 
+                ${seconds.toString().padStart(2, '0')}s`;
+
+            document.getElementById('time-remaining').textContent = formattedTime;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
