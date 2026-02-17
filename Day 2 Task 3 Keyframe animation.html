@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Keyframe Animations</title>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f2f5;
+        font-family: sans-serif;
+        gap: 100px;
+        margin: 0;
+    }
+
+    .container {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .box {
+        inline-size: 100px;
+        block-size: 100px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .bounce-up {
+        background-color: #00bfff;
+        animation: bounceInUp 10s infinite;
+    }
+
+    @keyframes bounceInUp {
+        0% {  transform: translateY(200px); }
+        60% { transform: translateY(-30px); }
+        80% { transform: translateY(10px); }
+        100% { transform: translateY(0); }
+    }
+
+    .pulse {
+        background-color: #ff5722;
+        animation: pulseEffect 2s infinite;
+    }
+
+    @keyframes pulseEffect {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .rotate {
+        background-color: #8bc34a;
+        animation: rotateEffect 12s infinite;
+    }
+
+    @keyframes rotateEffect {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+
+    <h1>CSS Animations</h1>
+
+    <div class="container">
+        <div class="box bounce-up">Bounce Up</div>
+        <div class="box pulse">Pulse</div>
+        <div class="box rotate">Rotate</div>
+    </div>
+
+</body>
+</html>

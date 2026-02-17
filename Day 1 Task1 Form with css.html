@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #486e90;
+        }
+
+         .container {
+            background: #f8f9f9;
+            inline-size: 500px;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-row {
+            display: flex;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            color: #2ebebe;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        select,
+        textarea {
+            padding: 8px;
+            border: 1px solid rgb(195, 180, 180);
+            border-radius: 4px;
+        }
+        
+        input[type="email"],
+        textarea{
+            padding: 8px;
+            border: 1px solid rgb(195, 180, 180);
+            border-radius: 4px;
+            inline-size: 410px;
+        }
+
+        .options {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            color: #555;
+            font-size: 10px;
+        }
+
+        .income-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .income-value {
+            background: #2cb89a;
+            color: white;
+            padding: 4px 4px;
+        }
+
+        .btn {
+            display: block;
+            margin-inline-start: 80%;
+            background: #2cb89a;
+            color: white;
+            padding: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: #26a186;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Account</h1>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First name *</label>
+                    <input type="text" id="fname" placeholder="enter your first name" required>
+                </div>
+                <div class="form-group">
+                    <label>Last name</label>
+                    <input type="text" id="lname" placeholder="enter your last name">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="email" placeholder="enter your email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" id="password" placeholder="enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password *</label>
+                    <input type="password" placeholder="enter your password again" required>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="options">
+                        <input type="radio" name="gender"> Male
+                        <input type="radio" name="gender"> Female
+                    </div>
+                </div>
+
+        
+                <div class="form-group">
+                    <label>Hobbies</label>
+                    <div class="options">
+                        <input type="checkbox"> Music
+                        <input type="checkbox"> Sports
+                        <input type="checkbox"> Travel
+                        <input type="checkbox"> Movies
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Source of Income</label>
+                    <select>
+                        <option>Employed</option>
+                        <option>Business</option>
+                        <option>Student</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Income</label>
+                    <div class="income-row">
+                        <input type="range" min="0" max="100">
+                        <span class="income-value">20K</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Upload Profile Picture</label>
+                    <input type="file">
+                </div>
+
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" id="age" value="18">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="bio"></textarea>
+                </div>
+            </div>
+
+            <button class="btn" onclick="saveData()">Create</button>
+
+            
+        <script type="module" src="Day 2 Task 5 firebase connection.js"></script>
+    </div>
+</body>
+</html>
