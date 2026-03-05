@@ -1,14 +1,16 @@
 const mysql = require('mysql2/promise');
 
 const dbConfig = {
-    host: 'localhost',
+    host: 'switchyard.proxy.rlwy.net',
+    port: 58584,
     user: 'root',
-    password: 'Admin@123',
-    database: 'flipkart',
-    waitForConnections: true,
+    password: 'AetVBefiVEAmwCZWmAbAGrdOoIuYxFfm',
+    database: 'railway',
+    waitForConnections: true
 };
 
 const pool = mysql.createPool(dbConfig);
+
 async function testConnection() {
     try {
         const connection = await pool.getConnection();
