@@ -362,7 +362,6 @@
                 
                 if (data.success) {
                     cartData = data.cartItems;
-                    // Pass the new pricing object and items
                     renderCart(data.cartItems, data.pricing);
                 } else {
                     cartList.innerHTML = '<p style="padding: 20px; text-align: center;">Failed to load cart. Please login again.</p>';
@@ -376,7 +375,6 @@
         function renderCart(items, pricing) {
             const cartList = document.getElementById('cartItemsList');
             
-            // If cart is empty
             if (!items || items.length === 0) {
                 cartList.innerHTML = `
                     <div class="empty-cart">
@@ -387,7 +385,6 @@
                     </div>
                 `;
                 document.getElementById('checkoutBtn').disabled = true;
-                // Reset totals
                 document.getElementById('grandTotal').textContent = '₹0';
                 return;
             }
@@ -429,13 +426,10 @@
             
             cartList.innerHTML = html;
             
-            // Update summary using the 'pricing' object from backend
             const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
             
             document.getElementById('itemCount').textContent = itemCount;
             document.getElementById('totalItems').textContent = itemCount;
-            
-            // FIX: Use 'pricing' object instead of 'total'
             document.getElementById('originalTotal').textContent = '₹' + pricing.totalMrp.toLocaleString();
             document.getElementById('totalDiscount').textContent = '- ₹' + pricing.totalDiscount.toLocaleString();
             document.getElementById('grandTotal').textContent = '₹' + pricing.finalAmount.toLocaleString();
@@ -464,7 +458,7 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    loadCart(); // Reload cart to update prices
+                    loadCart();
                 }
             } catch (error) {
                 console.error('Error updating quantity:', error);
@@ -487,7 +481,7 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    loadCart(); // Reload cart
+                    loadCart();
                 }
             } catch (error) {
                 console.error('Error removing item:', error);

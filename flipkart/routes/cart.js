@@ -3,7 +3,6 @@ const router = express.Router();
 const { pool } = require('../config/db');
 const authenticate = require('../middleware/authMiddleware');
 
-// Get user's cart with detailed pricing
 router.get('/', authenticate, async (req, res) => {
     try {
         const [cartItems] = await pool.query(`
@@ -37,7 +36,7 @@ router.get('/', authenticate, async (req, res) => {
             pricing: {
                 totalMrp,
                 totalDiscount,
-                deliveryCharges: 0, // Free delivery
+                deliveryCharges: 0,
                 finalAmount
             }
         });
@@ -51,12 +50,9 @@ router.get('/', authenticate, async (req, res) => {
     }
 });
 
-// Add item to cart
 router.post('/add', authenticate, async (req, res) => {
     try {
         const { productId, quantity = 1 } = req.body;
-
-        // Check if product exists and has stock
         const [products] = await pool.query(
             'SELECT * FROM products WHERE id = ? AND stock > 0',
             [productId]
@@ -69,21 +65,18 @@ router.post('/add', authenticate, async (req, res) => {
             });
         }
 
-        // Check if already in cart
         const [existingItem] = await pool.query(
             'SELECT * FROM cart WHERE user_id = ? AND product_id = ?',
             [req.userId, productId]
         );
 
         if (existingItem.length > 0) {
-            // Update quantity
             const newQty = existingItem[0].quantity + quantity;
             await pool.query(
                 'UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?',
                 [newQty, req.userId, productId]
             );
         } else {
-            // Add new item
             await pool.query(
                 'INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?)',
                 [req.userId, productId, quantity]
@@ -104,13 +97,11 @@ router.post('/add', authenticate, async (req, res) => {
     }
 });
 
-// Update cart item quantity
 router.put('/update', authenticate, async (req, res) => {
     try {
         const { cartId, quantity } = req.body;
 
         if (quantity <= 0) {
-            // Remove item if quantity is 0 or less
             await pool.query(
                 'DELETE FROM cart WHERE id = ? AND user_id = ?',
                 [cartId, req.userId]
@@ -136,7 +127,6 @@ router.put('/update', authenticate, async (req, res) => {
     }
 });
 
-// Remove item from cart
 router.delete('/remove/:cartId', authenticate, async (req, res) => {
     try {
         const { cartId } = req.params;

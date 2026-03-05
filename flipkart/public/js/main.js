@@ -1,12 +1,8 @@
-// API Base URL
 const API_URL = 'http://localhost:3000/api';
-
-// Global Variables
 let currentPage = 1;
 let currentCategory = null;
 let currentSearch = '';
 
-// Initialize App
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
     loadProducts();
@@ -17,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initCategories();
 });
 
-// Authentication Functions
 
 function checkAuth() {
     const token = localStorage.getItem('token');
@@ -81,7 +76,6 @@ function logout() {
     loadCartCount();
 }
 
-// Close dropdown when clicking outside
 document.addEventListener('click', function(e) {
     const dropdown = document.getElementById('userDropdown');
     const loginSection = document.querySelector('.login-section');
@@ -90,8 +84,6 @@ document.addEventListener('click', function(e) {
         dropdown.classList.remove('active');
     }
 });
-
-// Products Functions
 
 async function loadProducts(reset = true) {
     if (reset) {
@@ -122,7 +114,6 @@ async function loadProducts(reset = true) {
             
             renderProducts(data.products, grid);
             
-            // Update load more button
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             if (data.pagination.currentPage >= data.pagination.totalPages) {
                 loadMoreBtn.style.display = 'none';
@@ -183,7 +174,6 @@ function renderProducts(products, container) {
             </div>
         `;
         
-        // Click to view product
         card.addEventListener('click', function(e) {
             if (!e.target.closest('.add-to-cart-btn')) {
                 window.location.href = `product.html?id=${product.id}`;
@@ -198,8 +188,6 @@ function loadMoreProducts() {
     currentPage++;
     loadProducts(false);
 }
-
-// Cart Functions
 
 async function addToCart(productId, event) {
     event.stopPropagation();
@@ -265,7 +253,6 @@ async function loadCartCount() {
     }
 }
 
-// Carousel Functions
 
 let currentSlide = 0;
 let slideInterval;
@@ -274,7 +261,6 @@ function initCarousel() {
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.getElementById('carouselDots');
     
-    // Create dots
     slides.forEach((_, index) => {
         const dot = document.createElement('span');
         dot.className = `dot ${index === 0 ? 'active' : ''}`;
@@ -282,7 +268,6 @@ function initCarousel() {
         dotsContainer.appendChild(dot);
     });
     
-    // Start auto-slide
     startAutoSlide();
 }
 
@@ -327,7 +312,6 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
-// Search Functions
 
 function initSearch() {
     const searchInput = document.getElementById('searchInput');
@@ -353,7 +337,6 @@ function initSearch() {
     });
 }
 
-// Category Functions
 
 function initCategories() {
     const categoryItems = document.querySelectorAll('.category-item');
@@ -362,7 +345,6 @@ function initCategories() {
         item.addEventListener('click', function() {
             const categoryId = this.dataset.category;
             
-            // Toggle category
             if (currentCategory === categoryId) {
                 currentCategory = null;
                 this.classList.remove('active');
@@ -374,13 +356,10 @@ function initCategories() {
             
             loadProducts();
             
-            // Scroll to products
             document.querySelector('.all-products-section').scrollIntoView({ behavior: 'smooth' });
         });
     });
 }
-
-// Toast Notification
 
 function showToast(message) {
     const toast = document.getElementById('toast');

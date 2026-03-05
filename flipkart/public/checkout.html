@@ -177,7 +177,6 @@
             font-size: 24px;
         }
 
-        /* Sidebar Summary */
         .order-summary {
             position: sticky;
             top: 20px;
@@ -240,7 +239,6 @@
             cursor: not-allowed;
         }
 
-        /* Success Overlay */
         .success-overlay {
             position: fixed;
             top: 0;
@@ -303,7 +301,6 @@
             cursor: pointer;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .checkout-container {
                 grid-template-columns: 1fr;
@@ -320,7 +317,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="logo">
             <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus-44005d.svg" alt="Flipkart" onclick="window.location.href='index.html'">
@@ -328,13 +324,8 @@
         <span class="header-text">Checkout</span>
     </header>
 
-    <!-- Main Container -->
     <div class="checkout-container">
-        
-        <!-- Left Column: Steps -->
         <div class="checkout-steps">
-            
-            <!-- Step 1: Address -->
             <div class="step-card">
                 <div class="step-header">
                     <span class="step-number">1</span>
@@ -380,7 +371,6 @@
                 </div>
             </div>
 
-            <!-- Step 2: Payment -->
             <div class="step-card">
                 <div class="step-header">
                     <span class="step-number">2</span>
@@ -433,7 +423,6 @@
             </div>
         </div>
 
-        <!-- Right Column: Order Summary -->
         <div class="order-summary">
             <div class="summary-card">
                 <div class="summary-header">Order Summary</div>
@@ -462,7 +451,6 @@
         </div>
     </div>
 
-    <!-- Success Overlay (Hidden by default) -->
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
             <div class="success-icon">
@@ -474,25 +462,20 @@
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
         const API_URL = 'http://localhost:3000/api';
         let cartTotal = 0;
 
-        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('token');
             
-            // 1. Check if user is logged in
             if (!token) {
                 window.location.href = 'login.html';
                 return;
             }
             
-            // 2. Load cart summary data
             loadCartSummary();
             
-            // 3. Handle Payment Option Selection UI
             document.querySelectorAll('.payment-option').forEach(option => {
                 option.addEventListener('click', function() {
                     document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('selected'));
@@ -501,7 +484,6 @@
             });
         });
 
-        // Fetch Cart Data from Backend
         async function loadCartSummary() {
             const token = localStorage.getItem('token');
             
@@ -515,25 +497,21 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Check if cart is empty
                     if (data.cartItems.length === 0) {
                         alert("Your cart is empty!");
                         window.location.href = 'cart.html';
                         return;
                     }
 
-                    // Calculate totals
                     const pricing = data.pricing;
                     cartTotal = pricing.finalAmount;
 
-                    // Update the DOM elements
                     const itemCount = data.cartItems.reduce((sum, item) => sum + item.quantity, 0);
                     
                     document.getElementById('itemCount').textContent = itemCount;
                     document.getElementById('itemsTotal').textContent = '₹' + pricing.totalMrp.toLocaleString();
                     document.getElementById('totalAmount').textContent = '₹' + pricing.finalAmount.toLocaleString();
                     
-                    // Handle discount display
                     const discountEl = document.getElementById('discount');
                     if (pricing.totalDiscount > 0) {
                         discountEl.textContent = '- ₹' + pricing.totalDiscount.toLocaleString();
@@ -551,11 +529,9 @@
             }
         }
 
-        // Handle Order Placement
         async function placeOrder() {
             const token = localStorage.getItem('token');
             
-            // 1. Gather Form Data
             const fullName = document.getElementById('fullName').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const address = document.getElementById('address').value.trim();
@@ -564,7 +540,6 @@
             const state = document.getElementById('state').value.trim();
             const landmark = document.getElementById('landmark').value.trim();
 
-            // 2. Validate Form Data
             if (!fullName || !phone || !address || !city || !pincode || !state) {
                 alert('Please fill in all required fields');
                 return;
@@ -575,7 +550,6 @@
                 return;
             }
 
-            // 3. Prepare Data for API
             const shippingAddress = { 
                 fullName, 
                 phone, 
@@ -586,12 +560,10 @@
                 landmark 
             };
             
-            // 4. Update UI to Loading State
             const btn = document.getElementById('placeOrderBtn');
             btn.disabled = true;
             btn.textContent = 'Processing...';
 
-            // 5. Send API Request
             try {
                 const response = await fetch(`${API_URL}/orders/create`, {
                     method: 'POST',
@@ -605,7 +577,6 @@
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Show Success Overlay
                     document.getElementById('successOverlay').classList.add('active');
                 } else {
                     alert(data.message || 'Failed to place order');

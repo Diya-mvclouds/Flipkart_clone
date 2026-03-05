@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../config/db');
 
-// Get all products with pagination
 router.get('/', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
@@ -56,7 +55,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Get single product by ID
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -87,7 +85,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Get all categories
 router.get('/categories/all', async (req, res) => {
     try {
         const [categories] = await pool.query('SELECT * FROM categories');

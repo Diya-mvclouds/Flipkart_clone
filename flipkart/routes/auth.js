@@ -6,12 +6,10 @@ const { pool } = require('../config/db');
 
 const JWT_SECRET = 'flipkart_clone_secret_key_2024';
 
-// Register new user
 router.post('/register', async (req, res) => {
     try {
         const { name, email, password, phone } = req.body;
 
-        // Check if user already exists
         const [existingUser] = await pool.query(
             'SELECT * FROM users WHERE email = ?',
             [email]
@@ -24,16 +22,12 @@ router.post('/register', async (req, res) => {
             });
         }
 
-        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Insert new user
         const [result] = await pool.query(
             'INSERT INTO users (name, email, password, phone) VALUES (?, ?, ?, ?)',
             [name, email, hashedPassword, phone]
         );
 
-        // Generate token
         const token = jwt.sign(
             { userId: result.insertId, email },
             JWT_SECRET,
@@ -61,12 +55,9 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Login user
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-
-        // Find user
         const [users] = await pool.query(
             'SELECT * FROM users WHERE email = ?',
             [email]
@@ -81,7 +72,6 @@ router.post('/login', async (req, res) => {
 
         const user = users[0];
 
-        // Compare password
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -91,7 +81,6 @@ router.post('/login', async (req, res) => {
             });
         }
 
-        // Generate token
         const token = jwt.sign(
             { userId: user.id, email: user.email },
             JWT_SECRET,
@@ -119,7 +108,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Get user profile
 router.get('/profile', async (req, res) => {
     try {
         const token = req.headers.authorization?.split(' ')[1];

@@ -32,7 +32,6 @@
             <a href="#faq">FAQ</a>
         </nav>
 
-        <!-- Shipping Section -->
         <div id="shipping" class="help-section">
             <h2><i class="fas fa-truck"></i> Shipping Policy</h2>
             <p>We strive to deliver your products safely and on time.</p>
@@ -51,7 +50,6 @@
             </div>
         </div>
 
-        <!-- Returns Section -->
         <div id="returns" class="help-section">
             <h2><i class="fas fa-undo"></i> Cancellation & Returns</h2>
             
@@ -69,7 +67,6 @@
             </div>
         </div>
 
-        <!-- FAQ Section -->
         <div id="faq" class="help-section">
             <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
             
@@ -93,14 +90,12 @@
     </footer>
 
     <script>
-        // Simple smooth scroll for nav links
         document.querySelectorAll('.help-nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 
-                // Active state toggle
                 document.querySelectorAll('.help-nav a').forEach(a => a.classList.remove('active'));
                 this.classList.add('active');
             });

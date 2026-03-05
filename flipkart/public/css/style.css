@@ -49,9 +49,6 @@ img {
     height: auto;
 }
 
-/* ===================================
-   Top Banner
-   =================================== */
 .top-banner {
     background: linear-gradient(135deg, #ff9f00, #ff6b00);
     color: white;
@@ -67,9 +64,6 @@ img {
     50% { opacity: 0.9; }
 }
 
-/* ===================================
-   Header Styles
-   =================================== */
 .header {
     background: var(--primary);
     position: sticky;
@@ -116,7 +110,6 @@ img {
     font-weight: 700;
 }
 
-/* Search Bar */
 .search-container {
     flex: 1;
     max-width: 600px;
@@ -185,7 +178,6 @@ img {
     background: var(--bg-gray);
 }
 
-/* Login Section */
 .login-section {
     position: relative;
 }
@@ -267,7 +259,6 @@ img {
     color: var(--primary);
 }
 
-/* Cart Section */
 .cart-section {
     background: transparent;
     color: var(--white);
@@ -298,7 +289,6 @@ img {
     right: 10px;
 }
 
-/* Categories Navigation */
 .categories-nav {
     background: var(--white);
     box-shadow: var(--shadow);
@@ -347,7 +337,6 @@ img {
     white-space: nowrap;
 }
 
-/* Hero Carousel */
 .hero-carousel {
     max-width: 1400px;
     margin: 16px auto;
@@ -441,7 +430,6 @@ img {
     transform: scale(1.2);
 }
 
-/* Products Sections */
 .deals-section,
 .featured-section,
 .all-products-section {
@@ -481,7 +469,6 @@ img {
     transform: translateY(-2px);
 }
 
-/* Products Grid */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -492,7 +479,6 @@ img {
     box-shadow: var(--shadow);
 }
 
-/* Product Card */
 .product-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -613,7 +599,6 @@ img {
     background: var(--primary-dark);
 }
 
-/* Load More */
 .load-more-container {
     text-align: center;
     padding: 30px 20px;
@@ -635,7 +620,6 @@ img {
     color: var(--white);
 }
 
-/* Footer */
 .footer {
     background: #17233d;
     color: #878787;
@@ -692,7 +676,6 @@ img {
     font-size: 13px;
 }
 
-/* Toast Notification */
 .toast { 
     position: fixed;
     bottom: 30px;
@@ -724,7 +707,6 @@ img {
     font-size: 18px;
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
     .header-container {
         flex-wrap: wrap;
@@ -846,7 +828,6 @@ img {
     }
 }
 
-/* Loading Animation */
 .loading {
     display: flex;
     justify-content: center;

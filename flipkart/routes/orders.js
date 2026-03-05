@@ -3,12 +3,9 @@ const router = express.Router();
 const { pool } = require('../config/db');
 const authenticate = require('../middleware/authMiddleware');
 
-// Create new order
 router.post('/create', authenticate, async (req, res) => {
     try {
         const { shippingAddress } = req.body;
-
-        // Get cart items
         const [cartItems] = await pool.query(`
             SELECT c.product_id, c.quantity, p.price, p.discount_price, p.stock, p.name
             FROM cart c
@@ -23,26 +20,21 @@ router.post('/create', authenticate, async (req, res) => {
             });
         }
 
-        // Calculate total
         const totalAmount = cartItems.reduce((sum, item) => {
             const price = item.discount_price || item.price;
             return sum + (price * item.quantity);
         }, 0);
 
-        // Start transaction
         const connection = await pool.getConnection();
         await connection.beginTransaction();
 
         try {
-            // Create order
             const [orderResult] = await connection.query(
                 'INSERT INTO orders (user_id, total_amount, shipping_address) VALUES (?, ?, ?)',
                 [req.userId, totalAmount, JSON.stringify(shippingAddress)]
             );
 
             const orderId = orderResult.insertId;
-
-            // Add order items and update stock
             for (const item of cartItems) {
                 const price = item.discount_price || item.price;
                 
@@ -51,14 +43,12 @@ router.post('/create', authenticate, async (req, res) => {
                     [orderId, item.product_id, item.quantity, price]
                 );
 
-                // Update stock
                 await connection.query(
                     'UPDATE products SET stock = stock - ? WHERE id = ?',
                     [item.quantity, item.product_id]
                 );
             }
 
-            // Clear cart
             await connection.query('DELETE FROM cart WHERE user_id = ?', [req.userId]);
 
             await connection.commit();
@@ -85,7 +75,6 @@ router.post('/create', authenticate, async (req, res) => {
     }
 });
 
-// Get user's orders
 router.get('/my-orders', authenticate, async (req, res) => {
     try {
         const [orders] = await pool.query(`

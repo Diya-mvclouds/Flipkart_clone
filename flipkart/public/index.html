@@ -9,23 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Top Banner -->
     <div class="top-banner">
         <div class="banner-content">
             <span>🎉 Grand Sale! Up to 80% OFF on Electronics, Fashion & More!</span>
         </div>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <!-- Logo -->
             <div class="logo" onclick="window.location.href='index.html'">
                 <img src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/fkheaderlogo_exploreplus-44005d.svg" alt="Flipkart">
                 <span class="explore-text">Explore <span class="plus-text">Plus</span></span>
             </div>
 
-            <!-- Search Bar -->
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search for Products, Brands and More" autocomplete="off">
                 <button class="search-btn">
@@ -34,7 +30,6 @@
                 <div class="search-suggestions" id="searchSuggestions"></div>
             </div>
 
-            <!-- Login Button -->
             <div class="login-section">
                 <button class="login-btn" id="loginBtn" onclick="handleAuthClick()">
                     <i class="fas fa-user"></i>
@@ -46,12 +41,10 @@
                         <a href="signup.html">Sign Up</a>
                     </div>
                     <div class="dropdown-items" id="userMenuItems">
-                        <!-- Dynamic content -->
                     </div>
                 </div>
             </div>
 
-            <!-- Cart -->
             <div class="cart-section" onclick="window.location.href='cart.html'">
                 <i class="fas fa-shopping-cart"></i>
                 <span>Cart</span>
@@ -60,7 +53,6 @@
         </div>
     </header>
 
-    <!-- Categories Nav -->
     <nav class="categories-nav">
         <div class="categories-container">
             <div class="category-item" data-category="1">
@@ -94,9 +86,7 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Hero Banner Carousel -->
         <section class="hero-carousel">
             <div class="carousel-container">
                 <div class="carousel-slides" id="carouselSlides">
@@ -120,18 +110,15 @@
             </div>
         </section>
 
-        <!-- Deals Section -->
         <section class="deals-section">
             <div class="section-header">
                 <h2>Best Deals on Electronics</h2>
                 <button class="view-all-btn">View All</button>
             </div>
             <div class="products-grid" id="dealsGrid">
-                <!-- Products loaded dynamically -->
             </div>
         </section>
 
-        <!-- All Products -->
         <section class="all-products-section">
             <div class="section-header">
                 <h2>All Products</h2>
@@ -145,7 +132,6 @@
                 </div>
             </div>
             <div class="products-grid" id="allProductsGrid">
-                <!-- Products loaded dynamically -->
             </div>
             <div class="load-more-container">
                 <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreProducts()">
@@ -155,7 +141,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-section">
@@ -201,7 +186,6 @@
         </div>
     </footer>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">
         <div class="toast-content">
             <i class="fas fa-check-circle"></i>
