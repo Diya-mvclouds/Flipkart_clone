@@ -1,5 +1,5 @@
-create database if not exists railway;
-use railway;
+create database if not exists flipkart;
+use flipkart;
 
 -- Users
 create table users (
